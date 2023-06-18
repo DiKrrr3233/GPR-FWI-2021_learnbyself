@@ -31,6 +31,7 @@ def feature_normalize(data):
     '''此函数用于对数据进行归一化处理。'''
     if len(data.shape) == 1:
         normalized_data = np.zeros((data.shape[0]), dtype=float)
+        '''它创建了一个形状为 (data.shape[0]) 的零数组，数据类型为 float。这个数组用于存储归一化后的数据。'''
         for i in range(data.shape[0]):
             if (i + 1) % 2 == 1:
                 amplitude = np.sqrt(data[i] ** 2 + data[i + 1] ** 2)
@@ -61,7 +62,9 @@ def time_normalize(data):
 def mean_phase_abs_error(predictions, targets):
     """ !!!phase wrapping: Mean Absolute Error calculation for 2 1d numpy arrays
         inputs : two same size 1d numpy array, predicted results and the labels
-        output: one float value indicate the mean square error"""
+        output: one float value indicate the mean square error
+        此函数用于计算两个一维numpy数组之间的平均绝对误差。
+        """
     error_buffer = [abs(predictions - targets), abs(predictions - targets + 2 * np.pi),
                     abs(predictions - targets - 2 * np.pi)]
     error_buffer = np.array(error_buffer)
@@ -70,7 +73,8 @@ def mean_phase_abs_error(predictions, targets):
 
 
 def load_dataset(path):
-    """ read the hdf5 dataset
+    """此函数用于从hdf5文件中读取数据集。
+    read the hdf5 dataset
             input:
             path of the hdf5 dataset like 'dataSets/BP2004-new (trset1).h5'
         Return:
@@ -95,6 +99,7 @@ def load_dataset(path):
 
 
 def extract(x, length):
+    '''此函数用于从数据集中提取出射线和接收器对作为迹线。'''
     # Extract shot and receiver pairs as traces shape = (num of traces, number of frequency * 2)
     data_traces = []
     for i in range(x.shape[0]):  # iterate all shots
@@ -103,7 +108,7 @@ def extract(x, length):
     return data_traces
 
 
-# convert Re and Im to Phase
+# convert Re and Im to Phase 此函数用于将实部和虚部转换为相位。
 def tophase(data_re_im):
     """Feed in all traces, it would convert each trace and return all traces"""
     # If the input is a vector
