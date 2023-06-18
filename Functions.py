@@ -16,6 +16,7 @@ def clippig(data, clip=1):
     return data
 
 # Create dataset
+# 此函数用于创建数据集，它接受一个数据集和一个时间步长作为输入，并返回一个包含输入和输出数据的元组
 def create_dataset(dataset, look_back=2):
     dataX, dataY = [], []
     for i in range(len(dataset) - look_back):
@@ -27,6 +28,7 @@ def create_dataset(dataset, look_back=2):
 
 # Normalization
 def feature_normalize(data):
+    '''此函数用于对数据进行归一化处理。'''
     if len(data.shape) == 1:
         normalized_data = np.zeros((data.shape[0]), dtype=float)
         for i in range(data.shape[0]):
@@ -44,6 +46,7 @@ def feature_normalize(data):
 
 
 def time_normalize(data):
+    '''此函数用于对时间序列数据进行归一化处理。'''
     # data size is (shot*receiver, length of trace)
     normalized_data = np.zeros((data.shape[0], data.shape[1]), dtype=float)
     normalized_data_buffer = np.zeros((data.shape[0]), dtype=float)
